@@ -13,10 +13,10 @@ def either(*expressions: Expression) -> Expression:
 
 
 def either_str(*strings: str) -> Expression:
-    return either_strings_set(set(strings))
+    return either_str_set(set(strings))
 
 
-def either_strings_set(strings: Set[str]) -> Expression:
+def either_str_set(strings: Set[str]) -> Expression:
     trie = TrieExpression()
     trie.insert_all(strings)
     return trie
