@@ -26,7 +26,7 @@ class Node(Expression):
     def get(self, char):
         return self.nodes.get(char)
 
-    def synthesize_string_alternations(self):
+    def append_string_alternations(self):
         for key, value in self.nodes.items():
             escaped = as_regex_literal(key)
             if value is not None:
@@ -38,7 +38,7 @@ class Node(Expression):
             else:
                 self.has_optionals = True
 
-    def synthesize_character_classes(self):
+    def append_character_classes(self):
         self.has_character_classes = not self.alternations
         if self.char_classes:
             if len(self.char_classes) == 1:
@@ -52,8 +52,8 @@ class Node(Expression):
         if NULL_KEY in self.nodes and len(self.nodes) == 1:
             return None
 
-        self.synthesize_string_alternations()
-        self.synthesize_character_classes()
+        self.append_string_alternations()
+        self.append_character_classes()
 
         expression = []
 
